@@ -58,8 +58,8 @@ const data = {
       isActive: true,
       items: [
         {
-          title: "History",
-          url: "#",
+          title: "Dashboard",
+          url: "/dashboard-page/dashboard",
         },
         {
           title: "Starred",
@@ -72,13 +72,13 @@ const data = {
       ],
     },
     {
-      title: "Models",
+      title: "Data",
       url: "#",
       icon: Bot,
       items: [
         {
-          title: "Genesis",
-          url: "#",
+          title: "Manage Team",
+          url: "/dashboard-page/manage-team",
         },
         {
           title: "Explorer",

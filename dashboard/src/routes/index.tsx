@@ -3,14 +3,14 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/features/dashboard/components/side-bar-components/app-siderbar";
 
 export const Route = createFileRoute("/")({
-  component: Dashboard,
+  component: DashboardSideBar,
 });
 
-function Dashboard({ children }: { children: React.ReactNode }) {
+export function DashboardSideBar({ children }: { children?: React.ReactNode }) {
   return (
     <SidebarProvider>
       <AppSidebar />
-      <main>
+      <main className="w-full">
         <SidebarTrigger />
         {children}
       </main>
