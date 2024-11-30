@@ -91,25 +91,25 @@ const data = {
       ],
     },
     {
-      title: "Documentation",
+      title: "Charts",
       url: "#",
       icon: BookOpen,
       items: [
         {
-          title: "Introduction",
-          url: "#",
+          title: "Area Chart",
+          url: "/dashboard-page/area-chart",
         },
         {
-          title: "Get Started",
-          url: "#",
+          title: "Pie Chart",
+          url: "/dashboard-page/pie-chart-route",
         },
         {
-          title: "Tutorials",
-          url: "#",
+          title: "Bar Chart",
+          url: "/dashboard-page/bar-chart-route",
         },
         {
-          title: "Changelog",
-          url: "#",
+          title: "Radar Chart",
+          url: "/dashboard-page/radar-chart-route",
         },
       ],
     },
