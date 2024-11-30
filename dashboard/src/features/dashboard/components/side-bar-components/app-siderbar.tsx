@@ -62,8 +62,8 @@ const data = {
           url: "/dashboard-page/dashboard",
         },
         {
-          title: "Starred",
-          url: "#",
+          title: "Live Cameras",
+          url: "/dashboard-page/cameras/live-camera-route",
         },
         {
           title: "Settings",
