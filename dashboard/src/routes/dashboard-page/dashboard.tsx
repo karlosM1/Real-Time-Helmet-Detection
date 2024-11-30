@@ -15,6 +15,7 @@ import { WaveChartContainer } from "@/features/dashboard/components/dashboard-co
 import { PieChartContainer } from "@/features/dashboard/components/dashboard-components/pie-chart-container";
 import { BarChartContainer } from "@/features/dashboard/components/dashboard-components/bar-chart-container";
 import { RadarChartContainer } from "@/features/dashboard/components/dashboard-components/radar-chart-container";
+import { ManageTable } from "@/features/dashboard/page/manage-team/manage-table";
 
 export const Route = createFileRoute("/dashboard-page/dashboard")({
   component: RouteComponent,
@@ -57,6 +58,9 @@ function RouteComponent() {
           <PieChartContainer className="w-full" pieSize="max-w-[300px]" />
           <BarChartContainer className="w-full" />
           <RadarChartContainer />
+        </div>
+        <div>
+          <ManageTable />
         </div>
       </div>
     </div>
