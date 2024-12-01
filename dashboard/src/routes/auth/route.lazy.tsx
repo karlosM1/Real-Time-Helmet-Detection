@@ -1,5 +1,6 @@
 import { createLazyFileRoute } from "@tanstack/react-router";
 import { SignInForm } from "@/features/auth/components/signin-form";
+import { AuthPage } from "@/features/auth/components/auth-page";
 
 export const Route = createLazyFileRoute("/auth")({
   component: RouteComponent,
@@ -8,7 +9,7 @@ export const Route = createLazyFileRoute("/auth")({
 function RouteComponent() {
   return (
     <div className="flex justify-center items-center">
-      <SignInForm />
+      <AuthPage />
     </div>
   );
 }
