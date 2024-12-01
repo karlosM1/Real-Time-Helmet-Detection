@@ -1,128 +1,143 @@
-import { Button } from "@/components/ui/button";
-
+import { useState } from "react";
 import {
+  Tabs,
+  Tab,
+  Input,
+  Link,
+  Button,
   Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Mail } from "lucide-react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+  CardBody,
+  Checkbox,
+  Divider,
+} from "@nextui-org/react";
+import { useNavigate } from "@tanstack/react-router";
 
-export function SignInForm() {
+export function AuthForm() {
+  const [selected, setSelected] = useState("login");
+  const navigate = useNavigate();
+
+  const handleLogin = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    navigate({ to: "/" });
+  };
+
   return (
-    <div className="flex justify-center items-center ">
-      <Tabs defaultValue="sign-in" className="w-[400px] mx-auto">
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="sign-in">Sign In</TabsTrigger>
-          <TabsTrigger value="sign-up">Sign Up</TabsTrigger>
-        </TabsList>
-        <TabsContent value="sign-in">
-          <Card>
-            <CardHeader>
-              <CardTitle>Sign Up</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="space-y-1">
-                <Label htmlFor="email">Email Address</Label>
-                <Input id="email" type="email" />
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="confirmuPassword">Password</Label>
-                <Input id="password" type="password" />
-              </div>
-              <div className=" flex justify-between items-center">
-                <div className="flex items-center space-x-2">
-                  <Checkbox id="terms" />
-                  <label
-                    htmlFor="terms"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  >
+    <div className="flex flex-col w-full">
+      <Card className="max-w-full w-[340px] h-[550px]">
+        <CardBody className="overflow-hidden">
+          <Tabs
+            fullWidth
+            size="md"
+            aria-label="Tabs form"
+            selectedKey={selected ?? "login"}
+            onSelectionChange={(key) => setSelected(key as string)}
+          >
+            <Tab key="login" title="Login">
+              <form className="flex flex-col gap-4">
+                <Input
+                  isRequired
+                  label="Email"
+                  placeholder="Enter your email"
+                  type="email"
+                />
+                <Input
+                  isRequired
+                  label="Password"
+                  placeholder="Enter your password"
+                  type="password"
+                />
+                <div className="flex justify-between">
+                  <Checkbox size="sm" defaultSelected>
                     Remember me
-                  </label>
+                  </Checkbox>
+                  <Link href="#" color="foreground" className="text-small">
+                    Forgot Password?
+                  </Link>
                 </div>
-                <div>
-                  <Button variant="link">Forgot Password?</Button>
+                <div className="flex gap-2 justify-end">
+                  <Button
+                    onClick={() => handleLogin}
+                    fullWidth
+                    className="bg-blue-500"
+                  >
+                    Login
+                  </Button>
                 </div>
-              </div>
-              <div>
-                <Button className="w-full">Sign In</Button>
-              </div>
-            </CardContent>
-            <CardFooter className="flex flex-col gap-2">
-              <Button className="w-full">
-                <Mail /> Login with Google
-              </Button>
-              <Button className="w-full">
-                <Mail /> Login with Email
-              </Button>
-              <div>
+                <Divider className="my-2" />
+                <div className="flex flex-col gap-2 justify-end">
+                  <Button fullWidth variant="bordered" className="bg-secondary">
+                    Continue with Google
+                  </Button>
+                  <Button fullWidth variant="bordered" className="bg-secondary">
+                    Continue with Email
+                  </Button>
+                </div>
                 <p className="text-center text-small">
-                  Need to create an account?
-                  <Button variant="link" className="text-blue-500">
+                  Need to create an account?{" "}
+                  <Link
+                    size="sm"
+                    className="text-blue-500"
+                    onPress={() => setSelected("sign-up")}
+                  >
+                    Sign up
+                  </Link>
+                </p>
+              </form>
+            </Tab>
+            <Tab key="sign-up" title="Sign up">
+              <form className="flex flex-col gap-4 h-[300px]">
+                <Input
+                  isRequired
+                  label="Name"
+                  placeholder="Enter your name"
+                  type="text"
+                />
+                <Input
+                  isRequired
+                  label="Email"
+                  placeholder="Enter your email"
+                  type="email"
+                />
+                <Input
+                  isRequired
+                  label="Password"
+                  placeholder="Enter your password"
+                  type="password"
+                />
+                <div className="flex justify-between">
+                  <Checkbox size="sm" defaultSelected>
+                    I agree with the Terms and Privacy Policy
+                  </Checkbox>
+                </div>
+                <div className="flex gap-2 justify-end">
+                  <Button fullWidth className="bg-blue-500">
                     Sign up
                   </Button>
-                </p>
-              </div>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-        <TabsContent value="sign-up">
-          <Card>
-            <CardHeader>
-              <CardTitle>Sign Up</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-2">
-              <div className="space-y-1">
-                <Label htmlFor="email">Email Address</Label>
-                <Input id="email" type="email" />
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="confirmuPassword">Password</Label>
-                <Input id="password" type="password" />
-              </div>
-              <div className="space-y-1">
-                <Label htmlFor="confirmuPassword">Confirm Password</Label>
-                <Input id="confirmuPassword" type="password" />
-              </div>
-              <div className=" flex justify-between items-center ">
-                <div className="flex items-center space-x-2 my-3">
-                  <Checkbox id="terms" />
-                  <label
-                    htmlFor="terms"
-                    className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-                  >
-                    I agree with the Terms and Privacy Policy
-                  </label>
                 </div>
-              </div>
-              <div>
-                <Button className="w-full">Sign Up</Button>
-              </div>
-            </CardContent>
-            <CardFooter className="flex flex-col gap-2">
-              <Button className="w-full">
-                <Mail /> Login with Google
-              </Button>
-              <Button className="w-full">
-                <Mail /> Login with Email
-              </Button>
-              <div>
-                <p className="text-center text-small">
-                  Already have an account?
-                  <Button variant="link" className="text-blue-500">
-                    Log in
+                <Divider className="my-2" />
+                <div className="flex flex-col gap-2 justify-end">
+                  <Button fullWidth variant="bordered" className="bg-secondary">
+                    Continue with Google
                   </Button>
+                  <Button fullWidth variant="bordered" className="bg-secondary">
+                    Continue with Email
+                  </Button>
+                </div>
+                <p className="text-center text-small">
+                  Already have an account?{" "}
+                  <Link
+                    size="sm"
+                    className="text-blue-500"
+                    onPress={() => setSelected("login")}
+                  >
+                    Sign in
+                  </Link>
                 </p>
-              </div>
-            </CardFooter>
-          </Card>
-        </TabsContent>
-      </Tabs>
+              </form>
+            </Tab>
+          </Tabs>
+        </CardBody>
+      </Card>
     </div>
   );
 }
