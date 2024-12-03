@@ -1,5 +1,5 @@
 import { Card, CardContent } from "@/components/ui/card";
-//import { CircularProgress } from "@/components/ui/circular-progress";
+import { CircularProgress } from "@nextui-org/react";
 
 interface InfoContainerProps {
   icon?: React.ReactNode;
@@ -22,7 +22,18 @@ export function InfoContainer({
           <h1 className="font-bold text-xl mb-1">{statistics}</h1>
           <p className="text-xs">{title}</p>
         </div>
-        <div>{/* <CircularProgress progress={total ?? 0} /> */}</div>
+        <div className="flex justify-centeritems-center">
+          <CircularProgress
+            size="lg"
+            value={total}
+            color="success"
+            strokeWidth={4}
+            showValueLabel={true}
+            classNames={{
+              svg: "w-16 h-16 drop-shadow-md",
+            }}
+          />
+        </div>
       </CardContent>
     </Card>
   );
