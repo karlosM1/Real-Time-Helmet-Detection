@@ -19,8 +19,8 @@ export function HeaderButtons({ theme, setTheme }: HeaderButtonsProps) {
           isSelected={theme === "light"}
           size="lg"
           color="success"
-          startContent={<Sun />}
-          endContent={<Moon />}
+          startContent={<Moon />}
+          endContent={<Sun />}
           onChange={toggleTheme}
         ></Switch>
         <Button color="primary" variant="light">
