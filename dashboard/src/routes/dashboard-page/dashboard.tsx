@@ -6,10 +6,6 @@ import {
   ScanEye,
   UserRoundPlus,
   UsersRound,
-  Moon,
-  SunMedium,
-  Bell,
-  Settings,
 } from "lucide-react";
 import { WaveChartContainer } from "@/features/dashboard/components/dashboard-components/wave-chart-container";
 import { PieChartContainer } from "@/features/dashboard/components/dashboard-components/pie-chart-container";
