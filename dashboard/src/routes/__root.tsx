@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState } from "react";
 import { Outlet, createRootRoute } from "@tanstack/react-router";
 import { ThemeProvider } from "@/components/theme-provider";
 import "@/index.css";
@@ -10,13 +10,15 @@ export const Route = createRootRoute({
 });
 
 function RootComponent() {
+  const [theme, setTheme] = useState<"light" | "dark">("dark");
+  console.log(theme);
   return (
-    <React.Fragment>
-      <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+    <>
+      <ThemeProvider defaultTheme={theme} key={theme}>
         <DashboardSideBar
           children={
             <div className="flex flex-col w-full gap-6">
-              <HeaderButtons />
+              <HeaderButtons theme={theme} setTheme={setTheme} />
               <div>
                 <Outlet />
               </div>
@@ -24,6 +26,6 @@ function RootComponent() {
           }
         />
       </ThemeProvider>
-    </React.Fragment>
+    </>
   );
 }
