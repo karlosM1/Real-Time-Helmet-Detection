@@ -1,16 +1,10 @@
-import { Moon, SunMedium, Bell, Settings } from "lucide-react";
-import { Switch } from "@nextui-org/react";
+import { Bell, Settings } from "lucide-react";
+import { ModeToggle } from "../mode-toggle";
 
 export function PageHeader() {
   return (
     <div className="flex flex-row justify-end items-center">
-      <Switch
-        defaultSelected
-        size="lg"
-        color="success"
-        startContent={<SunMedium />}
-        endContent={<Moon />}
-      ></Switch>
+      <ModeToggle />
       <Bell />
       <Settings />
     </div>
