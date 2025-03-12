@@ -30,10 +30,24 @@ export const UserModel = mongoose.model("User", UserSchema);
 
 export const getUsers = () => UserModel.find();
 export const getUserByEmail = (email: string) => UserModel.findOne({ email });
-export const getUserBySessionToken = (sessionToken: string) =>
-  UserModel.findOne({
-    "authentication.sesstionToken": sessionToken,
-  });
+// export const getUserBySessionToken = (sessionToken: string) =>
+//   UserModel.findOne({
+//     "authentication.sesstionToken": sessionToken,
+//   });
+
+export const getUserBySessionToken = async (token: string) => {
+  console.log("Looking up user with token:", token); // Debugging step
+
+  const user = await UserModel.findOne({ sessionToken: token });
+
+  if (!user) {
+    console.log("No user found for this token.");
+  } else {
+    console.log("User found:", user);
+  }
+
+  return user;
+};
 
 export const getUserById = (id: string) => UserModel.findById(id);
 

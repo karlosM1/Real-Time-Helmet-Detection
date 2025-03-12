@@ -2,29 +2,32 @@ import express from "express";
 import { merge } from "lodash";
 import { getUserBySessionToken } from "../db/users";
 
-export const isAuthenticated = async (
-  req: express.Request,
-  res: express.Response,
-  next: express.NextFunction
+export const isAuthenticated: express.RequestHandler = async (
+  req,
+  res,
+  next
 ) => {
   try {
-    const sesstionToken = req.cookies["AUTH"];
+    const sessionToken = req.cookies["AUTH"];
 
-    if (!sesstionToken) {
-      return res.status(403).json({ message: "Unauthorized" });
+    if (!sessionToken) {
+      console.log("No session token found");
+      res.status(403).json({ message: "Unauthorized" });
+      return;
     }
 
-    const existingUser = await getUserBySessionToken(sesstionToken);
+    const existingUser = await getUserBySessionToken(sessionToken);
 
     if (!existingUser) {
-      return res.status(403).json({ message: "Unauthorized" });
+      res.status(403).json({ message: "Unauthorized" });
+      return;
     }
 
     merge(req, { identity: existingUser });
 
     next();
   } catch (error) {
-    console.log(error);
-    return res.status(500).json({ message: "Internal server error" });
+    console.error(error);
+    next(error);
   }
 };
