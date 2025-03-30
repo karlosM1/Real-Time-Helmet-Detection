@@ -24,13 +24,12 @@ const server = http.createServer(app);
 
 server.listen(8080, () => {
   console.log("Server running on http://localhost:8080/");
+  const MONGO_URL =
+    "mongodb+srv://karlos:karlos@cluster0.y6i3a.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
+
+  mongoose.Promise = Promise;
+  mongoose.connect(MONGO_URL);
+  mongoose.connection.on("error", (error: Error) => console.log(error));
 });
-
-const MONGO_URL =
-  "mongodb+srv://karlos:karlos@cluster0.y6i3a.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0";
-
-mongoose.Promise = Promise;
-mongoose.connect(MONGO_URL);
-mongoose.connection.on("error", (error: Error) => console.log(error));
 
 app.use("/", router());
