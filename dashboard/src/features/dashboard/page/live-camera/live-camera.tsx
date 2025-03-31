@@ -6,6 +6,7 @@ import { useLiveCamera } from "../../hooks/useLiveCamera";
 import ViolationCard from "./violation-card";
 import { CardContent, CardTitle } from "@/components/ui/card";
 import ViolationsTable from "./violation-table";
+import VideoUpload from "./video-upload";
 
 export function LiveCamera() {
   const { data, isLoading, isError, error } = useLiveCamera();
@@ -44,12 +45,7 @@ export function LiveCamera() {
   return (
     <div className="flex flex-col gap-4 mx-20">
       <div className="flex flex-row gap-4">
-        <Card>
-          <Skeleton className="h-[525px] w-[830px] rounded-xl" />
-        </Card>
-        <Card>
-          <Skeleton className="h-[525px] w-[830px] rounded-xl" />
-        </Card>
+        <VideoUpload />
       </div>
       <div className="flex w-full flex-col">
         <Tabs aria-label="Options">

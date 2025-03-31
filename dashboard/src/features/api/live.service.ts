@@ -7,7 +7,7 @@ export async function uploadVideo(file: File): Promise<ViolationsResponse> {
 
   try {
     const response = await axios.post<ViolationsResponse>(
-      `${import.meta.env.VITE_BASE_URL}upload_video/`,
+      "/api/upload_video/",
       formData,
       {
         headers: {
