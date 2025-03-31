@@ -1,10 +1,11 @@
 import { Tabs, Tab, Card, CardBody, CardHeader } from "@nextui-org/react";
 import { CardSkeleton } from "@/components/shared/card-skeleton";
 import { Skeleton } from "@/components/ui/skeleton";
-import { Radar, Cog } from "lucide-react";
+import { Radar, Cog, AlertTriangle } from "lucide-react";
 import { useLiveCamera } from "../../hooks/useLiveCamera";
 import ViolationCard from "./violation-card";
 import { CardContent, CardTitle } from "@/components/ui/card";
+import ViolationsTable from "./violation-table";
 
 export function LiveCamera() {
   const { data, isLoading, isError, error } = useLiveCamera();
@@ -63,11 +64,21 @@ export function LiveCamera() {
           >
             <Card>
               <CardBody className="flex flex-row gap-4">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {data?.violations?.map((violation, index) => (
-                    <ViolationCard key={index} violation={violation} />
-                  ))}
-                </div>
+                {data?.violations && data.violations.length > 0 ? (
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {data.violations.map((violation, index) => (
+                      <ViolationCard key={index} violation={violation} />
+                    ))}
+                  </div>
+                ) : (
+                  <div className="text-center py-8">
+                    <AlertTriangle className="mx-auto h-12 w-12 text-yellow-500 mb-4" />
+                    <h3 className="text-lg font-medium">No Violations Found</h3>
+                    <p className="text-muted-foreground mt-2">
+                      Upload a video to detect traffic violations.
+                    </p>
+                  </div>
+                )}
               </CardBody>
             </Card>
           </Tab>
@@ -76,26 +87,19 @@ export function LiveCamera() {
             title={
               <div className="flex flex-row gap-2 items-center">
                 <Cog />
-                <span>Settings</span>
+                <span>Table View</span>
               </div>
             }
           >
-            <Card>
-              <CardBody>
-                Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure
-                dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                fugiat nulla pariatur.
-              </CardBody>
-            </Card>
-          </Tab>
-          <Tab key="null" title="Null">
-            <Card>
-              <CardBody>
-                Excepteur sint occaecat cupidatat non proident, sunt in culpa
-                qui officia deserunt mollit anim id est laborum.
-              </CardBody>
-            </Card>
+            <ViolationsTable violations={data?.violations || []} />
+            <Tab key="null" title="Null">
+              <Card>
+                <CardBody>
+                  Excepteur sint occaecat cupidatat non proident, sunt in culpa
+                  qui officia deserunt mollit anim id est laborum.
+                </CardBody>
+              </Card>
+            </Tab>
           </Tab>
         </Tabs>
       </div>

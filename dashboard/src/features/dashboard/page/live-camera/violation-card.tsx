@@ -32,12 +32,13 @@ export default function ViolationCard({ violation }: ViolationCardProps) {
         </div>
       </CardHeader>
       <CardContent className="p-0">
-        <div className="relative h-48 w-full">
+        <div className="relative h-38 w-full sm:h-40 md:h-50 lg:h-60">
           <div className="absolute inset-0 flex items-center justify-center bg-muted">
             <img
               src={`data:image/jpeg;base64,${cropped_image}`}
               alt={`Violation by ${number_plate}`}
-              className="object-cover"
+              className="object-cover w-full h-full"
+              loading="lazy"
             />
           </div>
         </div>
