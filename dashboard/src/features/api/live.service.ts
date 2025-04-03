@@ -33,3 +33,7 @@ export async function fetchViolations(): Promise<ViolationsResponse> {
     throw error;
   }
 }
+
+export function getProcessedVideoUrl(videoId: string): string {
+  return `api/processed_video/${videoId}.mp4`;
+}
