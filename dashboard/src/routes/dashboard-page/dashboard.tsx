@@ -11,21 +11,44 @@ import { WaveChartContainer } from "@/features/dashboard/components/dashboard-co
 import { PieChartContainer } from "@/features/dashboard/components/dashboard-components/pie-chart-container";
 import { BarChartContainer } from "@/features/dashboard/components/dashboard-components/bar-chart-container";
 import { RadarChartContainer } from "@/features/dashboard/components/dashboard-components/radar-chart-container";
+import { useTotalUsers } from "@/hooks/use-total-users";
+import { useTotalViolations } from "@/hooks/use-total-violation";
 
 export const Route = createFileRoute("/dashboard-page/dashboard")({
   component: DashboardPage,
 });
 
 export function DashboardPage() {
+  const { data: totalUsersData, isLoading, error } = useTotalUsers();
+  const {
+    data: totalViolationsData,
+    isLoading: isLoadingViolations,
+    error: violationsError,
+  } = useTotalViolations();
+
   return (
     <div className="mx-20">
       <div className="flex flex-col gap-4">
         <div className="flex flex-row gap-4">
           <InfoContainer
             icon={<TriangleAlert />}
-            statistics="3,432"
+            statistics={
+              isLoadingViolations
+                ? "Loading..."
+                : violationsError
+                  ? "Error"
+                  : totalViolationsData?.total_violations.toLocaleString() ||
+                    "0"
+            }
             title="Violations Sent"
-            total={40}
+            total={
+              totalViolationsData
+                ? Math.min(
+                    100,
+                    (totalViolationsData.total_violations / 10000) * 100
+                  )
+                : 40
+            }
           />
           <InfoContainer
             icon={<ScanEye />}
@@ -41,9 +64,19 @@ export function DashboardPage() {
           />
           <InfoContainer
             icon={<UsersRound />}
-            statistics="23,463"
+            statistics={
+              isLoading
+                ? "Loading..."
+                : error
+                  ? "Error"
+                  : totalUsersData?.total_users.toLocaleString() || "0"
+            }
             title="Total Users"
-            total={20}
+            total={
+              totalUsersData
+                ? Math.min(100, (totalUsersData.total_users / 50000) * 100)
+                : 20
+            }
           />
         </div>
         <div>
