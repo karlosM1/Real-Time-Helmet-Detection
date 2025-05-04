@@ -4,3 +4,7 @@ export interface DashboardInfoContainer {
   new_users: string;
   total_users: string;
 }
+
+export interface TotalUser {
+  total_users: string;
+}
