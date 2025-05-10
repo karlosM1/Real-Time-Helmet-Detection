@@ -52,7 +52,7 @@ export function DashboardPage() {
           />
           <InfoContainer
             icon={<ScanEye />}
-            statistics="04"
+            statistics="02"
             title="Live Cameras"
             total={100}
           />
