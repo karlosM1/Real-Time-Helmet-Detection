@@ -1,8 +1,8 @@
 export interface Violation {
-  number_plate: string;
-  timestamp: string;
-  isHelmet: string;
-  cropped_image: string;
+  plate_number: string;
+  violation_type: string;
+  detected_at: string;
+  image_url: string;
 }
 
 export interface ViolationsResponse {

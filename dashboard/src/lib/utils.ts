@@ -5,14 +5,26 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function formatDate(dateString: string): string {
-  const date = new Date(dateString);
-  return new Intl.DateTimeFormat("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-    second: "2-digit",
-  }).format(date);
+// export function formatDate(dateString: string): string {
+//   const date = new Date(dateString);
+//   return new Intl.DateTimeFormat("en-US", {
+//     year: "numeric",
+//     month: "short",
+//     day: "numeric",
+//     hour: "2-digit",
+//     minute: "2-digit",
+//     second: "2-digit",
+//   }).format(date);
+// }
+
+export function formatDate(input: string | Date | undefined | null): string {
+  if (!input) return "Unknown date";
+
+  const date = new Date(input);
+  if (isNaN(date.getTime())) return "Invalid date";
+
+  return date.toLocaleString(undefined, {
+    dateStyle: "medium",
+    timeStyle: "short",
+  });
 }
