@@ -61,7 +61,7 @@ export function LiveCamera() {
             <Card>
               <CardBody className="flex flex-row gap-4">
                 {data?.violations && data.violations.length > 0 ? (
-                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
                     {data.violations.map((violation, index) => (
                       <ViolationCard key={index} violation={violation} />
                     ))}

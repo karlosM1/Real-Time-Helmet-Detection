@@ -39,22 +39,22 @@ export default function ViolationsTable({ violations }: ViolationsTableProps) {
           {violations.map((violation, index) => (
             <TableRow key={index}>
               <TableCell className="font-medium">
-                {violation.number_plate}
+                {violation.plate_number}
               </TableCell>
-              <TableCell>{formatDate(violation.timestamp)}</TableCell>
+              <TableCell>{formatDate(violation.detected_at)}</TableCell>
               <TableCell>
                 <Badge
                   variant={
-                    violation.isHelmet === "No Helmet"
+                    violation.violation_type === "No Helmet"
                       ? "destructive"
                       : "default"
                   }
                   className="flex gap-1 items-center"
                 >
-                  {violation.isHelmet === "No Helmet" && (
+                  {violation.violation_type === "No Helmet" && (
                     <AlertTriangle className="h-3 w-3" />
                   )}
-                  {violation.isHelmet}
+                  {violation.violation_type}
                 </Badge>
               </TableCell>
               <TableCell className="text-right">
@@ -68,13 +68,13 @@ export default function ViolationsTable({ violations }: ViolationsTableProps) {
                   <DialogContent>
                     <DialogHeader>
                       <DialogTitle>
-                        Violation Image - {violation.number_plate}
+                        Violation Image - {violation.plate_number}
                       </DialogTitle>
                     </DialogHeader>
                     <div className="flex items-center justify-center relative h-[400px] w-full mt-4">
                       <img
-                        src={`data:image/jpeg;base64,${violation.cropped_image}`}
-                        alt={`Violation by ${violation.number_plate}`}
+                        src={`data:image/jpeg;base64,${violation.image_url}`}
+                        alt={`Violation by ${violation.plate_number}`}
                         className="object-contain rounded-md"
                         height={400}
                         width={400}

@@ -16,7 +16,9 @@ function RootComponent() {
       <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
         <DashboardSideBar
           children={
-            <div className="flex flex-col w-full gap-6">
+            <div
+              className={`flex flex-col w-full gap-6 ${"bg-white dark:bg-black"}`}
+            >
               <HeaderButtons />
               <div>
                 <Outlet />
