@@ -73,11 +73,10 @@ export default function ViolationsTable({ violations }: ViolationsTableProps) {
                     </DialogHeader>
                     <div className="flex items-center justify-center relative h-[400px] w-full mt-4">
                       <img
-                        src={`data:image/jpeg;base64,${violation.image_url}`}
+                        src={`/api/images/${violation.image_url}`}
                         alt={`Violation by ${violation.plate_number}`}
-                        className="object-contain rounded-md"
-                        height={400}
-                        width={400}
+                        className="object-cover w-[200px] h-[200px]"
+                        loading="lazy"
                       />
                     </div>
                   </DialogContent>
