@@ -34,3 +34,14 @@ export async function fetchTotalViolations(): Promise<TotalViolations> {
     throw error;
   }
 }
+
+export const fetchUserName = async (plate_number: string): Promise<string> => {
+  const response = await fetch(
+    `/api/dashboard/user-name?plate_number=${plate_number}`
+  );
+  if (!response.ok) {
+    throw new Error("Failed to fetch user name");
+  }
+  const data = await response.json();
+  return data.name;
+};

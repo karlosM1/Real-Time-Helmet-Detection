@@ -58,7 +58,7 @@ export function DashboardPage() {
           />
           <InfoContainer
             icon={<UserRoundPlus />}
-            statistics="12,431"
+            statistics="3"
             title="New Users"
             total={70}
           />
