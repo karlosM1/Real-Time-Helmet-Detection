@@ -49,8 +49,9 @@ npm install
 
 # Start the development server
 npm run dev
-
+```
 ## 📁 Prokect Structure
+```bash
 .
 ├── src/
 │   ├── components/       # Reusable UI components
@@ -58,6 +59,6 @@ npm run dev
 │   ├── routes/           # TanStack router configuration
 │   ├── hooks/            # Custom React hooks
 │   └── lib/              # Utility functions and helpers
-
+```
 ## 🤝 Contributing
 Contributions are welcome! Feel free to open issues or submit pull requests for improvements or new features.
