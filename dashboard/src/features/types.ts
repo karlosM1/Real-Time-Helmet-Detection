@@ -7,4 +7,5 @@ export interface Violation {
 
 export interface ViolationsResponse {
   violations: Violation[];
+  video_url: string;
 }

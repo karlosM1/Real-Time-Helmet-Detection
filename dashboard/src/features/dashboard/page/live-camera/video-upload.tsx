@@ -1,5 +1,4 @@
 import type React from "react";
-
 import { useState } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
@@ -16,25 +15,36 @@ import { Progress } from "@/components/ui/progress";
 import { Upload, CheckCircle, AlertCircle } from "lucide-react";
 import { uploadVideo } from "@/features/api/live.service";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import LiveStream from "./live-stream";
 
 export default function VideoUpload() {
   const [file, setFile] = useState<File | null>(null);
   const [uploadProgress, setUploadProgress] = useState(0);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [videoPreviewUrl, setVideoPreviewUrl] = useState<string | null>(null);
+
   const queryClient = useQueryClient();
 
   const uploadMutation = useMutation({
     mutationFn: uploadVideo,
-    onSuccess: () => {
-      // Invalidate and refetch the violations query
+    onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ["violations"] });
       setUploadProgress(100);
+      if (data?.video_url) {
+        const backendUrl = ""; // adjust for production endpoint
+        setVideoPreviewUrl(`${backendUrl}${data.video_url}`);
+      }
     },
   });
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
-      setFile(e.target.files[0]);
+      const selectedFile = e.target.files[0];
+      setFile(selectedFile);
       setUploadProgress(0);
+
+      const previewUrl = URL.createObjectURL(selectedFile);
+      setVideoPreviewUrl(previewUrl);
     }
   };
 
@@ -54,6 +64,7 @@ export default function VideoUpload() {
     try {
       await uploadMutation.mutateAsync(file);
       clearInterval(interval);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       clearInterval(interval);
       setUploadProgress(0);
@@ -79,7 +90,21 @@ export default function VideoUpload() {
               disabled={uploadMutation.isPending}
             />
           </div>
-
+          {/* {videoPreviewUrl && (
+            <div className="mt-4">
+              <video
+                src={videoPreviewUrl}
+                controls
+                className="w-full max-w-xl"
+              />
+            </div>
+          )} */}
+          {/* {uploadMutation.isPending || uploadMutation.isSuccess ? (
+            <LiveStream />
+          ) : null} */}
+          <div className="p-4">
+            <LiveStream />
+          </div>{" "}
           {uploadProgress > 0 && (
             <div className="space-y-2">
               <Progress value={uploadProgress} className="w-full" />
@@ -90,7 +115,6 @@ export default function VideoUpload() {
               </p>
             </div>
           )}
-
           {uploadMutation.isSuccess && (
             <Alert
               variant="default"
@@ -103,7 +127,6 @@ export default function VideoUpload() {
               </AlertDescription>
             </Alert>
           )}
-
           {uploadMutation.isError && (
             <Alert variant="destructive">
               <AlertCircle className="h-4 w-4" />
